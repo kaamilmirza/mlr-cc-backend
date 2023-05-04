@@ -9,15 +9,15 @@ firebase.initializeApp(config.firebaseConfig);
 firebaseAdmin.initializeApp({credential: firebaseAdmin.credential.cert(config.firebaseServiceAccount)});
 // // console.log(firebase.auth());
 
-const userId = "n6X1CPYmSzc9Q6qcPRBAZkzM6lu2";
-firebaseAdmin.auth().createCustomToken(userId).then((customToken) => { 
-    return firebaseAdmin.auth().signInWithCustomToken(customToken);
-}).then((userCredential) => {
-    const idToken = userCredential.idToken;
-    console.log('ID Token:' ,idToken);
-}).catch((error) => {
-    console.log('Error creating custom token:', error);
-});
+// const userId = "n6X1CPYmSzc9Q6qcPRBAZkzM6lu2";
+// firebaseAdmin.auth().createCustomToken(userId).then((customToken) => { 
+//     return firebaseAdmin.auth().signInWithCustomToken(customToken);
+// }).then((userCredential) => {
+//     const idToken = userCredential.idToken;
+//     console.log('ID Token:' ,idToken);
+// }).catch((error) => {
+//     console.log('Error creating custom token:', error);
+// });
 
 
 module.exports = {firebase, firebaseauth, firebaseAdmin};

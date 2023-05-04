@@ -12,6 +12,10 @@ const studentSchema = new Schema({
         type: String,
         required: true
     },
+    rno : {
+        type: Number,
+        required: true
+    },
     uid : {
         type: String,
         required: true

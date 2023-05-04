@@ -3,6 +3,7 @@ const port = process.env.PORT || 3000;
 
 const routes = require('./routes/routes');
 const firebaseService = require('./services/firebase.service');
+const mongoService = require('./services/mongo.service');
 
 const app = express();
 app.use(express.json());
