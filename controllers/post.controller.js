@@ -3,7 +3,7 @@ const allServices = require('../services/allServices.js');
 module.exports = class postController {
     static async apiCreatePost(req, res, next) {
         try {
-            const post = await allServices.apiCreatePost(req.body);
+            const post = await allServices.apiCreatePost(req);
             res.status(201).json({
                 status: 'success',
                 data: post,

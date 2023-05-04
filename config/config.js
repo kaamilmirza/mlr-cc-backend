@@ -15,7 +15,6 @@ const {
     FIREBASE_MESSAGING_SENDER_ID,
     FIREBASE_APP_ID,
     FIREBASE_DATABASE_URL,
-    FIREBASE_MEASUREMENT_ID,
     type,
     project_id,
     private_key_id,
@@ -52,7 +51,7 @@ assert(client_x509_cert_url, 'client_x509_cert_url is required');
 assert(MONGO_URL, 'mongoURI is required');
 
 module.exports = {
-    port: PORT,
+    PORT: PORT,
     host: HOST,
     url: HOST_URL,
     firebaseConfig: {
