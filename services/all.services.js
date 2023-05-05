@@ -1,9 +1,9 @@
 const ppost = require('../models/p_post.model.js');
 const cpost = require('../models/club.model.js');
 const nboard = require('../models/n_board.model.js');
-const mongoService = require('../services/mongo.service');
+const mongoService = require('./mongo.service.js');
 const fs = require('fs');
-const {firebase, firebaseauth, firebaseAdmin} = require('../services/firebase.service');
+const {firebase, firebaseauth, firebaseAdmin} = require('./firebase.service.js');
 
 module.exports = class allServices{
 //creating placement posts 
@@ -155,4 +155,35 @@ module.exports = class allServices{
             console.log(error);
         }
     }
+
+    //finding timetable 
+    static async apiGetTimetable(req){
+        try{
+            const {branch, year, section} = req.body;
+            const timetable = await mongoService.collection('timetable').findOne({branch, year, section});
+            return timetable;
+        }catch(error){
+            throw error;
+        }
+    }
+
+    //deleting nbpost
+    static async apiDeleteNBPost(body){
+        try{
+            const {title} = body;
+            const post = await nboard.deleteOne({where: {title}});
+            console.log(post);
+            return post;
+        }catch(error){
+            throw error;
+        }
+    }
 }
+    // static async apiUploadImage(req){
+    //     try{
+            
+    //     }
+    // }
+
+
+

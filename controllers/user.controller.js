@@ -1,6 +1,6 @@
 const UserService = require('../services/user.service');
-const allServices = require('../services/allServices');
-
+const allServices = require('../services/all.services');
+const backBlazeService = require('../services/backBlaze.service');
 module.exports = class UserController {
 
     static async apiSignUp(req, res, next) {
@@ -128,7 +128,52 @@ module.exports = class UserController {
         }
     }
 
+    static async apiGetTimetable(req, res, next) {
+        try{
+            const timetable = await allServices.apiGetTimetable(req);
+            res.status(201).json({
+                status: 'success',
+                data: timetable,
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
 
-
+    static async apiTimetableUpdate(req, res, next) {
+        try{
+            const timetable = await allServices.apiTimetableUpdate(req);
+            res.status(201).json({
+                status: 'success',
+                data: timetable,
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
+    
+    static async apiUploadImage(req, res, next) {
+        try{
+            const image = await backBlazeService.uploadFile(req);
+            res.status(201).json({
+                status: 'success',
+                data: image,
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
 }
     

@@ -43,7 +43,11 @@ const studentSchema = new Schema({
     section : {
         type: String,
         required: true,
-    },  
+    },
+    imageURL : {
+        type: String,
+        required: true
+    }  
 });
 
 const Student = mongoose.model('Student', studentSchema);

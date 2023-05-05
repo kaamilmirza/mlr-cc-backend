@@ -1,4 +1,4 @@
-const allServices = require('../services/allServices.js');
+const allServices = require('../services/all.services.js');
 
 module.exports = class cpostController {
     static async apiCreateCPost(req, res, next) {

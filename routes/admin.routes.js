@@ -5,6 +5,7 @@ const verifyToken = require('../middlewares/verifyToken');
 const upload = require('../middlewares/upload');
 const cpost = require('../controllers/cpost.controller');
 const userController = require('../controllers/user.controller');
+const { uploadn } = require('../services/backblaze.service');
 
 //placement post create
 router.route('/ppost').post(upload.single('image'), postController.apiCreatePost);
@@ -12,6 +13,7 @@ router.route('/ppost').post(upload.single('image'), postController.apiCreatePost
 
 //notice board post create
 router.route('/nbpost').post(postController.apiCreateNBPost);
+router.route('/deleteNBpost').post(postController.apiDeleteNBPost);
 
 //get last 5 posts
 
@@ -27,5 +29,6 @@ router.route('/getUser').post(userController.apiGetUser)
 //timetable 
 router.route('/timetable').post(upload.single('image'), userController.apiTimetable);
 
+router.route('/uploadImage').post(upload.single('image'), userController.apiUploadImage);
 
 module.exports = router;

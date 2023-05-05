@@ -24,7 +24,11 @@ const {
     auth_uri,
     token_uri,
     auth_provider_x509_cert_url,
-    client_x509_cert_url
+    client_x509_cert_url,
+    B2_APPLICATION_KEY,
+    B2_ACCOUNT_ID,
+    B2_BUCKET_ID,
+
 } = process.env;
 
 assert(PORT, 'PORT is required');
@@ -76,4 +80,9 @@ module.exports = {
         client_x509_cert_url: client_x509_cert_url,
     },
     mongoURI: MONGO_URL,
+    blackBlaze: {
+        applicationKeyId: B2_ACCOUNT_ID,
+        applicationKey: B2_APPLICATION_KEY,
+        bucketId: B2_BUCKET_ID,
+    },
 };
