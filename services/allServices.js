@@ -115,8 +115,6 @@ module.exports = class allServices{
         }
     }
 
-
-
     //getting notice board posts
     static async apiGetNBPosts(){
         try{
@@ -126,4 +124,35 @@ module.exports = class allServices{
             throw error;
         }
     }  
+
+    //creating timetable
+    static async apiCreateTimetable(body){
+        try{
+            const {branch, year, timetable, section} = body;
+            //upload timetable image to firebase storage and get the url
+            const bucket = firebaseAdmin.storage().bucket();
+            const fileExt = req.file;
+            const fileName = `${Date.now()}.${fileExt.originalname.split('.').pop()}`;
+            const fileRef = bucket.file(fileName);
+            const url = bucket.upload(req.file.path, {
+                destination: `clubposts/${fileName}`,
+                metadata: {
+                    contentType: fileExt.mimetype
+                },
+            }).then((data) => {
+                fs.unlinkSync(req.file.path);
+                return data[0].getSignedUrl({
+                    action: 'read',
+                    expires: '03-09-2491'
+                });
+            });
+            const imageURL = (await url).toString();
+            const timetableDoc = await mongoService.collection('timetable').insertOne({
+                branch, year, imageURL, section
+            });
+            return timetableDoc;
+        }catch(error){
+            console.log(error);
+        }
+    }
 }

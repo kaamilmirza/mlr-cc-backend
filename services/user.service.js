@@ -28,6 +28,31 @@ module.exports = class UserService {
         }
     }
 
+    static async apiUserUpdate(body){
+        try{
+            const {uid, name, email, branch,
+                semester, year, phone, rno, section} = body;
+            const user = await User.findOneAndUpdate({uid: uid}, {
+                rno, section,
+                name, email, uid, branch,
+                semester, year, phone
+            });
+            return user;
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    static async apiUserDelete(body){
+        try{
+            const {uid} = body;
+            const user = await User.findOneAndDelete({uid: uid});
+            return user;
+        }catch(error){
+            console.log(error);
+        }
+    }
+    
     static async apiGetUser(body){
         try{
             const {uid} = body;

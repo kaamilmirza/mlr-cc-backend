@@ -18,6 +18,40 @@ module.exports = class UserController {
         }
     }
 
+    static async apiUserUpdate(req, res, next){
+        try{
+            const user = await UserService.apiUserUpdate(req.body);
+            res.status(201).json({
+                status: 'success',
+                data: user,
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+
+    }
+
+    static async apiUserDelete(req, res, next){
+        try{
+            const user = await UserService.apiUserDelete(req.body);
+            res.status(201).json({
+                status: 'success',
+                data: user,
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
+
+
     static async apiGetUser(req, res, next){
         try{
             const user = await UserService.apiGetUser(req.body);
@@ -78,6 +112,22 @@ module.exports = class UserController {
             });
         }
     }
+
+    static async apiTimetable(req, res, next) {
+        try{
+            const timetable = await allServices.apiCreateTimetable(req.body);
+            res.status(201).json({
+                status: 'success',
+                data: timetable,
+            });
+        }catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
+
 
 
 }
