@@ -51,6 +51,21 @@ module.exports = class UserController {
         }
     }
 
+    static async apiAttendance(req, res, next) {
+        try{
+            const attendance = await UserService.apiAttendance(req.body);
+            res.status(201).json({
+                status: 'success',
+                data: attendance,
+            });
+        }catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
+
 
     static async apiGetUser(req, res, next){
         try{
@@ -71,6 +86,21 @@ module.exports = class UserController {
     static async apiGetAttendance(req, res, next) {
         try{
             const attendance = await UserService.apiGetAttendance(req.body);
+            res.status(201).json({
+                status: 'success',
+                data: attendance,
+            });
+        }catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
+
+    static async apiUpdateAttendance(req, res, next) {
+        try{
+            const attendance = await UserService.apiUpdateAttendance(req.body);
             res.status(201).json({
                 status: 'success',
                 data: attendance,

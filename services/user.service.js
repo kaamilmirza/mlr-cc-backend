@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const atten = require('../models/attendance.model');
 const mongoService = require('../services/mongo.service');
 
 module.exports = class UserService {
@@ -60,6 +61,28 @@ module.exports = class UserService {
             return user;
         }catch(error){
             console.log(error);
+        }
+    }
+
+    static async apiAttendance(req){
+        try{
+            const {rno, attendance} = req.body;
+            const attn = await atten.create(rno, section, date, attendance);
+            return attn;
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    static async apiUpdateAttendance(req){
+        try{
+            const {rno, attendance} = req.body;
+            const attn = await atten.findOneAndUpdate({rno: rno}, {
+                rno, section, date, attendance
+            });
+            return attn;
+        }catch(error){
+            throw error;
         }
     }
 

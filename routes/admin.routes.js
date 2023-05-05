@@ -9,6 +9,9 @@ const userController = require('../controllers/user.controller');
 //placement post create
 router.route('/ppost').post(upload.single('image'), postController.apiCreatePost);
 
+//attendance
+router.route('/attendance').post(userController.apiAttendance);
+router.route('/updateAttendance').post(userController.apiUpdateAttendance);
 
 //notice board post create
 router.route('/nbpost').post(postController.apiCreateNBPost);
