@@ -1,6 +1,5 @@
 const UserService = require('../services/user.service');
 const allServices = require('../services/all.services');
-const backBlazeService = require('../services/backBlaze.service');
 module.exports = class UserController {
 
     static async apiSignUp(req, res, next) {
