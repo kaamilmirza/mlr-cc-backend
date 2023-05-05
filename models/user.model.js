@@ -13,7 +13,7 @@ const studentSchema = new Schema({
         required: true
     },
     rno : {
-        type: Number,
+        type: String,
         required: true
     },
     uid : {
@@ -37,8 +37,12 @@ const studentSchema = new Schema({
         required: true
     },
     phone: {
-        type: Number,
+        type: String,
         required: true
+    },
+    section : {
+        type: String,
+        required: true,
     },  
 });
 

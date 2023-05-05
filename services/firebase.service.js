@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const appname = "MLRCC";
-firebase.initializeApp(config.firebaseConfig, appname);
+firebase.initializeApp(config.firebaseConfig, appname);8
     
 const firebaseAdmin = firebaseAdm.initializeApp({
     credential: firebaseAdm.credential.cert(config.firebaseServiceAccount),

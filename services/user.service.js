@@ -5,9 +5,10 @@ module.exports = class UserService {
     static async apiSignUp(body) {
         try {
             const { name, email, uid, branch,
-                    semester, year, phone
+                    semester, year, phone, rno, section
             } = body;
-            const user = await User.create({
+            const user = await User.create({ 
+                rno, section,
                 name, email, uid, branch,
                 semester, year, phone});
             return user;
