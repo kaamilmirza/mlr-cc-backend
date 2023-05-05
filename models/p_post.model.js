@@ -17,7 +17,6 @@ const ppostSchema = new Schema({
     },
     link : {
         type: String,
-        required: true
     },
     createdAt : {
         type: Date,

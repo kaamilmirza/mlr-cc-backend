@@ -1,18 +1,19 @@
 const config = require("../config/config");
 const firebase = require("firebase/app");
 const firebaseauth = require("firebase/auth");
-const firebaseAdmin = require("firebase-admin");
+const firebaseAdm = require("firebase-admin");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const appname = "MLRCC"
-firebase.initializeApp(config.firebaseConfig);
+const appname = "MLRCC";
+firebase.initializeApp(config.firebaseConfig, appname);
     
-firebaseAdmin.initializeApp(
-  {
-    credential: firebaseAdmin.credential.cert(config.firebaseServiceAccount),
-  } 
-);
+const firebaseAdmin = firebaseAdm.initializeApp({
+    credential: firebaseAdm.credential.cert(config.firebaseServiceAccount),
+    storageBucket: config.firebaseConfig.storageBucket,
+  }, appname);
+
+console.log("Firebase Initialized");
 // // console.log(firebase.auth());
 
 // const userId = "n6X1CPYmSzc9Q6qcPRBAZkzM6lu2";

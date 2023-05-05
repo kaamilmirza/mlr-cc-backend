@@ -4,8 +4,8 @@ const config = require('../config/config');
 const dotenv = require('dotenv');
 dotenv.config();
 
-mongoose.connect(config.mongoURI);
-
+// console.log(config.mongoURI);
+mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 
 connection.once('open', () => {
