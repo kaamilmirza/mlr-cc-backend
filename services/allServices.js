@@ -126,16 +126,16 @@ module.exports = class allServices{
     }  
 
     //creating timetable
-    static async apiCreateTimetable(body){
+    static async apiCreateTimetable(req){
         try{
-            const {branch, year, timetable, section} = body;
+            const {branch, year, section} = req.body;
             //upload timetable image to firebase storage and get the url
             const bucket = firebaseAdmin.storage().bucket();
             const fileExt = req.file;
             const fileName = `${Date.now()}.${fileExt.originalname.split('.').pop()}`;
             const fileRef = bucket.file(fileName);
             const url = bucket.upload(req.file.path, {
-                destination: `clubposts/${fileName}`,
+                destination: `timetable/${fileName}`,
                 metadata: {
                     contentType: fileExt.mimetype
                 },

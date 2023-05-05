@@ -14,11 +14,11 @@ const timetable = new Schema({
         type: String,
         required: true
     },
-    iamgeURL : {
+    imageURL : {
         type: String,
         required: true
     },
 });
 
-const Nboard = mongoose.model('timetable', timetable);
-module.exports = timetable;
+const tt = mongoose.model('timetable', timetable);
+module.exports = tt;

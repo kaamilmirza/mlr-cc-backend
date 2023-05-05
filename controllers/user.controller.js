@@ -115,7 +115,7 @@ module.exports = class UserController {
 
     static async apiTimetable(req, res, next) {
         try{
-            const timetable = await allServices.apiCreateTimetable(req.body);
+            const timetable = await allServices.apiCreateTimetable(req);
             res.status(201).json({
                 status: 'success',
                 data: timetable,
