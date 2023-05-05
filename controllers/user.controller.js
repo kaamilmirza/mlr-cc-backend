@@ -18,6 +18,22 @@ module.exports = class UserController {
         }
     }
 
+    static async apiGetUser(req, res, next){
+        try{
+            const user = await UserService.apiGetUser(req.body);
+            res.status(201).json({
+                status: 'success',
+                data: user,
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
+
     static async apiGetAttendance(req, res, next) {
         try{
             const attendance = await UserService.apiGetAttendance(req.body);
@@ -47,5 +63,22 @@ module.exports = class UserController {
             });
         }
     }
+
+    static async apiGetPosts(req, res, next) {
+        try{
+            const posts = await allServices.apiGetPost(req.body);
+            res.status(201).json({
+                status: 'success',
+                data: posts,
+            });
+        }catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
+
+
 }
     

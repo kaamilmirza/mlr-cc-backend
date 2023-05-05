@@ -35,7 +35,6 @@ module.exports = class allServices{
         try{
             //get last 5 posts from pposts mongodb
             const posts = await mongoService.collection('pposts').find().sort({createdAt:-1}).limit(5).toArray();
-            console.log(posts);
             return posts;
         }catch(error){
             throw error;

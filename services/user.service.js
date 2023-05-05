@@ -28,4 +28,14 @@ module.exports = class UserService {
         }
     }
 
+    static async apiGetUser(body){
+        try{
+            const {uid} = body;
+            const user = await User.findOne({uid: uid});
+            return user;
+        }catch(error){
+            console.log(error);
+        }
+    }
+
 }
