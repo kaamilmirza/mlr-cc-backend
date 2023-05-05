@@ -178,12 +178,13 @@ module.exports = class allServices{
             throw error;
         }
     }
+
+    //upload image to firebase storage
+    static async apiUploadImage(req){
+        
+    }
+
 }
-    // static async apiUploadImage(req){
-    //     try{
-            
-    //     }
-    // }
 
 
 
