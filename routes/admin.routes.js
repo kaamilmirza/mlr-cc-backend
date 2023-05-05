@@ -26,7 +26,7 @@ router.route('/deletecpost').post(cpost.apiDeleteCPost);
 router.route('/getclub').get(cpost.apiGetCPost);
 
 //get user
-router.route('/getUser').post(userController.apiGetUser)
+router.route('/getUser').get(userController.apiGetUser)
 
 //timetable 
 router.route('/timetable').post(upload.single('image'), userController.apiTimetable);
