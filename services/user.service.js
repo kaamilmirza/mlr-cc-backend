@@ -6,12 +6,12 @@ module.exports = class UserService {
     static async apiSignUp(body) {
         try {
             const { name, email, uid, branch,
-                    semester, year, phone, rno, section
+                    semester, year, phone, rno, section, imageUrl
             } = body;
             const user = await User.create({ 
                 rno, section,
                 name, email, uid, branch,
-                semester, year, phone});
+                semester, year, phone, imageUrl});
             return user;
         } catch (error) {
             throw error;
