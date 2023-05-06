@@ -67,7 +67,7 @@ module.exports = class UserService {
     static async apiAttendance(req){
         try{
             const {rno, attendance} = req.body;
-            const attn = await atten.create(rno, section, date, attendance);
+            const attn = await atten.create({rno, attendance});
             return attn;
         }catch(error){
             console.log(error);
