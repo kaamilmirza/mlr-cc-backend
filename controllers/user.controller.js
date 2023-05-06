@@ -210,7 +210,7 @@ module.exports = class UserController {
             const question = await allServices.qpiGetQuestions(req);
             res.status(201).json({
                 status: 'success',
-                data: image,
+                data: question,
             })
         }
         catch(error){

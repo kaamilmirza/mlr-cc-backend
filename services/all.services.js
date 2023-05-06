@@ -198,8 +198,7 @@ module.exports = class allServices{
     static async qpiGetQuestions(req){
         const days = req.body.days;
         try{
-            const collection = mongoService.collection("Questions");
-
+            const collection = mongoService.collection("questions");
             const daysago = new Date();
             daysago.setDate(fiveDaysAgo.getDate() - days);
 
@@ -216,9 +215,12 @@ module.exports = class allServices{
 
     static async apiPostReply(req){
         try{
-            const {id, text, username, imageUrl } = req.body;
+            const {_id, text, username, imageUrl } = req.body;
             const reply = {text, username, imageUrl};
-            const post = await Question.updateOne({id}, {$push: {comments: reply}});
+            //push reply to comments of question with id
+            console.log(_id);
+            const post = await Question.findByIdAndUpdate(_id, {$push: {comments: reply}});
+            console.log(post);
             return post;
         }catch(error){
             throw error;
