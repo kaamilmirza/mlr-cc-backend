@@ -288,5 +288,22 @@ module.exports = class UserController {
         }
     }
 
+    static async apigetUsers(req, res, next){
+        try{
+            const users = await allServices.apiGetUsers();
+            res.status(201).json({
+                status: 'success',
+                data: users
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message
+            }
+            )
+        }
+    }
+
 }
     

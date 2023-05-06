@@ -8,6 +8,7 @@ const {ObjectId} = require('mongodb');
 const { database } = require('firebase-admin');
 const Question = require('../models/question.model.js');
 const Explore = require('../models/explore.model.js');
+const User = require('../models/user.model.js');
 
 module.exports = class allServices{
 //creating placement posts 
@@ -253,6 +254,15 @@ module.exports = class allServices{
                //get previous 10 posts
                 const posts = await Explore.find().sort({createdAt: -1}).limit(10);
                 return posts;
+            }catch(error){
+                throw error;
+            }
+        }
+
+        static async apiGetUsers(){
+            try{
+                const users = await User.find();
+                return users;
             }catch(error){
                 throw error;
             }

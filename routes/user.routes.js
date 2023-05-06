@@ -20,5 +20,6 @@ router.route('/getQuestions').get(userController.apiGetQuestions);
 router.route('/postReply').post(userController.apiPostReply);
 router.route('/postExplore').post(upload.single('image'), userController.apiPostExplore);
 router.route('/getExplore').get(userController.apiGetExplore);
+router.route('/getUsers').get(userController.apigetUsers);
 
 module.exports = router;
