@@ -199,14 +199,7 @@ module.exports = class allServices{
         const days = req.body.days;
         try{
             const collection = mongoService.collection("questions");
-            const daysago = new Date();
-            daysago.setDate(fiveDaysAgo.getDate() - days);
-
-            const result = collection.find({
-                createdAt: {
-                    $gte : daysago
-                }
-            })
+            const result = collection.find().toArray();
             return result;
         }catch(error){
             return error;
