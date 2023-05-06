@@ -52,7 +52,7 @@ module.exports = class UserController {
 
     static async apiAttendance(req, res, next) {
         try{
-            const attendance = await UserService.apiAttendance(req.body);
+            const attendance = await UserService.apiAttendance(req);
             res.status(201).json({
                 status: 'success',
                 data: attendance,
