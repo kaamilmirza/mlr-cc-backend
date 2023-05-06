@@ -14,4 +14,19 @@ module.exports = class UserController {
             });
         }
     }
+
+    static async apiPostReply(req, res, next) {
+        try {
+            const question = await allServices.apiPostReply(req);
+            res.status(201).json({
+                status: 'success',
+                data: question,
+            });
+        } catch (error) {
+            res.status(500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
 }

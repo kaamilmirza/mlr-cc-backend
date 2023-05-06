@@ -11,7 +11,8 @@ const questionSchema = new Schema({
     },
     id: {
         type: Object,
-        
+        required: true,
+        unique: true,
     },
     comments : {
         type: Array,

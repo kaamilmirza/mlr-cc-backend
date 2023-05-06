@@ -6,6 +6,7 @@ const fs = require('fs');
 const {firebase, firebaseauth, firebaseAdmin} = require('./firebase.service.js');
 const {ObjectId} = require('mongodb');
 const { database } = require('firebase-admin');
+const Question = require('../models/question.model.js');
 
 module.exports = class allServices{
 //creating placement posts 
@@ -120,7 +121,8 @@ module.exports = class allServices{
     //getting notice board posts
     static async apiGetNBPosts(){
         try{
-            const posts = mongoService.collection('nboards').find().toArray();
+            const posts = mongoService.collection('nboards').find(
+            ).sort({createdAt: -1}).toArray();
             return posts;
         }catch(error){
             throw error;
@@ -186,7 +188,7 @@ module.exports = class allServices{
             const {question} = req.body;
             const id = new ObjectId();
             const comments = [];
-            const post = await question.create({question, id, comments});
+            const post = await Question.create({question, id, comments});
             return post;
         }catch(error){
             throw error;
@@ -211,6 +213,18 @@ module.exports = class allServices{
             return error;
         }
     }
+
+    static async apiPostReply(req){
+        try{
+            const {id, text, username, imageUrl } = req.body;
+            const reply = {text, username, imageUrl};
+            const post = await question.updateOne({id}, {$push: {comments: reply}});
+            return post;
+        }catch(error){
+            throw error;
+        }
+    }
+
 
 
 
