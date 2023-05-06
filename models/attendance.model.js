@@ -12,5 +12,5 @@ const attn = new Schema({
     },
 });
 
-const atten = mongoose.model('attendance', attn);
+const atten = mongoose.model('attendances', attn);
 module.exports = atten;

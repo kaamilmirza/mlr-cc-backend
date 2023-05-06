@@ -218,7 +218,7 @@ module.exports = class allServices{
         try{
             const {id, text, username, imageUrl } = req.body;
             const reply = {text, username, imageUrl};
-            const post = await question.updateOne({id}, {$push: {comments: reply}});
+            const post = await Question.updateOne({id}, {$push: {comments: reply}});
             return post;
         }catch(error){
             throw error;
