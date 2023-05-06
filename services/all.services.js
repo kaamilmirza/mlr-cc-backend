@@ -201,7 +201,8 @@ module.exports = class allServices{
         const days = req.body.days;
         try{
             const collection = mongoService.collection("questions");
-            const result = collection.find().toArray();
+            //get recent 10 questions
+            const questions = await collection.find().sort({createdAt: -1}).limit(10).toArray();
             return result;
         }catch(error){
             return error;
