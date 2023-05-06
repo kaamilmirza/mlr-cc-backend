@@ -204,5 +204,54 @@ module.exports = class UserController {
             });
         }
     }
+
+    static async apiGetQuestions(req, res, next){
+        try{
+            const question = await allServices.qpiGetQuestions(req);
+            res.status(201).json({
+                status: 'success',
+                data: image,
+            })
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message
+            });
+        }
+    }
+
+    static async apiCreateQuestions(req, res, next){
+        try{
+            const question = await allServices.apiCreateQuestion(req);
+            res.status(201).json({
+                status: 'success',
+                data: question,
+            })
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message
+            });
+        }
+    }
+
+    static async apiPostReply(req, res, next){
+        try{
+            const reply = await allServices.apiPostReply(req);
+            res.status(201).json({
+                status: 'success',
+                data: reply
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message
+            }
+            )
+        }
+    }
 }
     

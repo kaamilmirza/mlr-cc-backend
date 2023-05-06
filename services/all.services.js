@@ -4,6 +4,8 @@ const nboard = require('../models/n_board.model.js');
 const mongoService = require('./mongo.service.js');
 const fs = require('fs');
 const {firebase, firebaseauth, firebaseAdmin} = require('./firebase.service.js');
+const {ObjectId} = require('mongodb');
+const { database } = require('firebase-admin');
 
 module.exports = class allServices{
 //creating placement posts 
@@ -179,10 +181,43 @@ module.exports = class allServices{
         }
     }
 
-    //upload image to firebase storage
-    static async apiUploadImage(req){
-        
+    static async apiCreateQuestion(req){
+        try{
+            const {question} = req.body;
+            const id = new ObjectId();
+            const comments = [];
+            const post = await question.create({question, id, comments});
+            return post;
+        }catch(error){
+            throw error;
+        }
     }
+
+    static async qpiGetQuestions(req){
+        const days = req.body.days;
+        try{
+            const collection = mongoService.collection("Questions");
+
+            const daysago = new Date();
+            daysago.setDate(fiveDaysAgo.getDate() - days);
+
+            const result = collection.find({
+                createdAt: {
+                    $gte : daysago
+                }
+            })
+            return result;
+        }catch(error){
+            return error;
+        }
+    }
+
+
+
+    // //upload image to firebase storage
+    // static async apiUploadImage(req){
+        
+    // }
 
 }
 

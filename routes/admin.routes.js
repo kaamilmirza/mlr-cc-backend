@@ -31,6 +31,6 @@ router.route('/getUser').get(userController.apiGetUser)
 //timetable 
 router.route('/timetable').post(upload.single('image'), userController.apiTimetable);
 
-router.route('/uploadImage').post(upload.single('image'), userController.apiUploadImage);
+// router.route('/uploadImage').post(upload.single('image'), userController.apiUploadImage);
 
 module.exports = router;
