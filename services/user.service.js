@@ -21,7 +21,7 @@ module.exports = class UserService {
     static async apiGetAttendance(body) {
         try{
             const {rno} = body;
-            const attendance = mongoService.collection('attendance').findOne({rno: rno});
+            const attendance = mongoService.collection('attendances').findOne({rno: rno});
             console.log(attendance);
             return attendance;
         }catch(error){

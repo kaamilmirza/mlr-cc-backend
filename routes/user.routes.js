@@ -16,4 +16,6 @@ router.route('/getppost').get(userController.apiGetPosts);
 router.route('/getTimetable').get(userController.apiGetTimetable);
 router.route('/createQuestion').post(userController.apiCreateQuestions);
 router.route('/getQuestions').get(userController.apiGetQuestions);
+router.route('/postReply').post(userController.apiPostReply);
+
 module.exports = router;
