@@ -253,5 +253,40 @@ module.exports = class UserController {
             )
         }
     }
+
+    static async apiPostExplore(req, res, next){
+        try{
+            const explore = await allServices.apiPostExplore(req);
+            res.status(201).json({
+                status: 'success',
+                data: explore
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message
+            }
+            )
+        }
+    }
+
+    static async apiGetExplore(req, res, next){
+        try{
+            const explore = await allServices.apiGetExplore();
+            res.status(201).json({
+                status: 'success',
+                data: explore
+            });
+        }
+        catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message
+            }
+            )
+        }
+    }
+
 }
     

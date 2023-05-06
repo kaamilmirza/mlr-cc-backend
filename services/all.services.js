@@ -7,6 +7,7 @@ const {firebase, firebaseauth, firebaseAdmin} = require('./firebase.service.js')
 const {ObjectId} = require('mongodb');
 const { database } = require('firebase-admin');
 const Question = require('../models/question.model.js');
+const Explore = require('../models/explore.model.js');
 
 module.exports = class allServices{
 //creating placement posts 
@@ -220,6 +221,45 @@ module.exports = class allServices{
         }
     }
 
+    static async apiPostExplore(req){
+        try{
+            const {name, photoUrl} = req.body;
+            const bucket = firebaseAdmin.storage().bucket();
+            const fileExt = req.file;
+            const fileName = `${Date.now()}.${fileExt.originalname.split('.').pop()}`;
+            const fileRef = bucket.file(fileName);
+            const url = bucket.upload(req.file.path, {
+                destination: `explore/${fileName}`,
+                metadata: {
+                    contentType: fileExt.mimetype
+                },
+            }).then((data) => {
+                fs.unlinkSync(req.file.path);
+                return data[0].getSignedUrl({
+                    action: 'read',
+                    expires: '03-09-2491'
+                });
+            });
+            const imageLink = (await url).toString();
+            const post = await Explore.create({name, photoUrl, imageLink});
+            return post;
+        }catch(error){
+            throw error;
+        }
+    }
+
+        static async apiGetExplore(){
+            try{
+               //get previous 10 posts
+                const posts = await Explore.find().sort({createdAt: -1}).limit(10);
+                return posts;
+            }catch(error){
+                throw error;
+            }
+        }
+    }
+
+
 
 
 
@@ -228,7 +268,7 @@ module.exports = class allServices{
         
     // }
 
-}
+
 
 
 
