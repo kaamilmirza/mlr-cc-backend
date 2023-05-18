@@ -27,10 +27,11 @@ router.route('/getclub').get(cpost.apiGetCPost);
 
 //get user
 router.route('/getUser').get(userController.apiGetUser)
+router.route('/getStudents').get(userController.apiGetStudents);
 
 //timetable 
 router.route('/timetable').post(upload.single('image'), userController.apiTimetable);
 
-// router.route('/uploadImage').post(upload.single('image'), userController.apiUploadImage);
+router.route('/uploadtest').post(upload.single('file'), userController.apiFileUpload);
 
 module.exports = router;

@@ -1,5 +1,7 @@
 const UserService = require('../services/user.service');
 const allServices = require('../services/all.services');
+const backBlazeService = require('../services/b2.service');
+
 module.exports = class UserController {
 
     static async apiSignUp(req, res, next) {
@@ -189,7 +191,7 @@ module.exports = class UserController {
         }
     }
     
-    static async apiUploadImage(req, res, next) {
+    static async apiFileUpload(req, res, next) {
         try{
             const image = await backBlazeService.uploadFile(req);
             res.status(201).json({
@@ -302,6 +304,21 @@ module.exports = class UserController {
                 message: error.message
             }
             )
+        }
+    }
+
+    static async apiGetStudents(req, res, next){
+        try{
+            const students = await allServices.apiGetStudents();
+            res.status(201).json({
+                status: 'success',
+                data: students
+            });
+        }catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error.message
+            })
         }
     }
 

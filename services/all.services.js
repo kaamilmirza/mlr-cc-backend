@@ -9,6 +9,7 @@ const { database } = require('firebase-admin');
 const Question = require('../models/question.model.js');
 const Explore = require('../models/explore.model.js');
 const User = require('../models/user.model.js');
+const Student = require('../models/student.model');
 
 module.exports = class allServices{
 //creating placement posts 
@@ -32,14 +33,14 @@ module.exports = class allServices{
         
         const {title, uid, text, link  } = req.body;
         const imageURL = (await url).toString();
-        const post = await ppost.create({title, uid, text, link, imageURL});
+        const post = await ppost.create({title, uid, text, link, imageURL}).learn();
         return post;
     }
     //api for getting placement posts
     static async apiGetPost(req){
         try{
             //get last 5 posts from pposts mongodb
-            const posts = await mongoService.collection('pposts').find().sort({createdAt:-1}).limit(5).toArray();
+            const posts = await mongoService.collection('pposts').find().lean().sort({createdAt:-1}).limit(5).toArray();
             return posts;
         }catch(error){
             throw error;
@@ -74,7 +75,7 @@ module.exports = class allServices{
     static async apiGetCPost(req){
         try{
             //get all collection from cposts mongodb
-            const posts = await mongoService.collection('cposts').find().toArray();
+            const posts = await mongoService.collection('cposts').find().lean().toArray();
             console.log(posts);
             return posts;
         }catch(error){
@@ -102,7 +103,7 @@ module.exports = class allServices{
         const imageURL = (await url).toString();
         try{
             const {title, description, clubname, date, venue, link} = req.body;
-            const post = await cpost.updateOne({title, description, clubname, date, venue, link, imageURL}, {where: {title: req.body.title}});
+            const post = await cpost.updateOne({title, description, clubname, date, venue, link, imageURL}, {where: {title: req.body.title}}).lean();
             return post;
         }catch(error){
             throw error;
@@ -124,7 +125,7 @@ module.exports = class allServices{
     static async apiGetNBPosts(){
         try{
             const posts = mongoService.collection('nboards').find(
-            ).sort({createdAt: -1}).toArray();
+            ).sort({createdAt: -1}).lean().toArray();
             return posts;
         }catch(error){
             throw error;
@@ -166,7 +167,7 @@ module.exports = class allServices{
     static async apiGetTimetable(req){
         try{
             const {branch, year, section} = req.body;
-            const timetable = await mongoService.collection('timetable').findOne({branch, year, section});
+            const timetable = await mongoService.collection('timetable').findOne({branch, year, section}).lean();
             return timetable;
         }catch(error){
             throw error;
@@ -202,7 +203,7 @@ module.exports = class allServices{
         try{
             const collection = mongoService.collection("questions");
             //get recent 10 questions
-            const questions = await collection.find().sort({createdAt: -1}).limit(10).toArray();
+            const questions = await collection.find().lean().sort({createdAt: -1}).limit(10).toArray();
             return result;
         }catch(error){
             return error;
@@ -215,7 +216,7 @@ module.exports = class allServices{
             const reply = {text, username, imageUrl};
             //push reply to comments of question with id
             console.log(_id);
-            const post = await Question.findByIdAndUpdate(_id, {$push: {comments: reply}});
+            const post = await Question.findByIdAndUpdate(_id, {$push: {comments: reply}}).lean();
             console.log(post);
             return post;
         }catch(error){
@@ -253,7 +254,7 @@ module.exports = class allServices{
         static async apiGetExplore(){
             try{
                //get previous 10 posts
-                const posts = await Explore.find().sort({createdAt: -1}).limit(10);
+                const posts = await Explore.find().lean().sort({createdAt: -1}).limit(10);
                 return posts;
             }catch(error){
                 throw error;
@@ -264,6 +265,15 @@ module.exports = class allServices{
             try{
                 const users = await User.find();
                 return users;
+            }catch(error){
+                throw error;
+            }
+        }
+
+        static async apiGetStudents(){
+            try{
+                const students = await Student.find().lean();
+                return students;
             }catch(error){
                 throw error;
             }
