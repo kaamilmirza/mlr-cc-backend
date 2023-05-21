@@ -9,7 +9,7 @@ const { database } = require('firebase-admin');
 const Question = require('../models/question.model.js');
 const Explore = require('../models/explore.model.js');
 const User = require('../models/user.model.js');
-const Student = require('../models/student.model');
+const {Student_data, Course} = require('../models/student.model');
 
 module.exports = class allServices{
 //creating placement posts 
@@ -197,14 +197,13 @@ module.exports = class allServices{
             throw error;
         }
     }
-
-    static async qpiGetQuestions(req){
-        const days = req.body.days;
+    
+    static async apiGetQuestions(req){
         try{
-            const collection = mongoService.collection("questions");
+            // const collection =  mongoService.collection("questions");
             //get recent 10 questions
-            const questions = await collection.find().lean().sort({createdAt: -1}).limit(10).toArray();
-            return result;
+            const question = await Question.find().lean().limit(10);
+            return question;
         }catch(error){
             return error;
         }
@@ -253,8 +252,8 @@ module.exports = class allServices{
 
         static async apiGetExplore(){
             try{
-               //get previous 10 posts
-                const posts = await Explore.find().lean().sort({createdAt: -1}).limit(10);
+                //get previous 10 posts latest
+                const posts = await Explore.find().lean().limit(10);
                 return posts;
             }catch(error){
                 throw error;
@@ -272,7 +271,7 @@ module.exports = class allServices{
 
         static async apiGetStudents(){
             try{
-                const students = await Student.find().lean();
+                const students = await Student_data.find().lean();
                 return students;
             }catch(error){
                 throw error;

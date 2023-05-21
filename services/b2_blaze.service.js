@@ -37,6 +37,8 @@ class BackBlaze {
       headers: this.uploadHeaders(fileName, file.length, createHash('sha1').update(file).digest('hex')),
       body: file,
     });
+    console.log(response);
+
     if (response.statusCode !== 200) throw new Error(`Failed to upload file: ${response.statusCode}`);
     const json = await response.body.json();
     return json;

@@ -32,6 +32,6 @@ const studentSchema = new mongoose.Schema({
   }
 });
 
-const Student = mongoose.model('Student', studentSchema);
+const Student_data = mongoose.model('Student_data', studentSchema);
 const Course = mongoose.model('Course', courseSchema);
-module.exports = {Student, Course};
+module.exports = {Student_data, Course};

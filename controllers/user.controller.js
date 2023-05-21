@@ -209,7 +209,7 @@ module.exports = class UserController {
 
     static async apiGetQuestions(req, res, next){
         try{
-            const question = await allServices.qpiGetQuestions(req);
+            const question = await allServices.apiGetQuestions(req);
             res.status(201).json({
                 status: 'success',
                 data: question,
