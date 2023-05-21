@@ -5,14 +5,17 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // console.log(config.mongoURI);
-mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, 
-autoIndex: false, 
-poolSize: <PoolSize>, 
-connectTimeoutMS: <Timeout>, 
-socketTimeoutMS: <Timeout>, 
-family: 4, 
-serverSelectionTimeoutMS: <Timeout>, 
-heartbeatFrequencyMS: 1500, });
+mongoose.connect(config.mongoURI, 
+    {useNewUrlParser: true,
+    useUnifiedTopology: true,
+    autoIndex: false,
+    maxPoolSize: 100, // Adjust based on expected concurrency and server capacity
+    connectTimeoutMS: 5000, // Adjust based on network conditions
+    socketTimeoutMS: 15000, // Adjust based on expected response time
+    family: 4,
+    serverSelectionTimeoutMS: 10000, // Adjust based on deployment complexity
+    heartbeatFrequencyMS: 3000});
+    
 const connection = mongoose.connection;
 
 connection.once('open', () => {
